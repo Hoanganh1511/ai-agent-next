@@ -18,11 +18,11 @@ export default function Home() {
         callbackURL: "/",
       },
       {
-        onRequest: (ctx) => {},
-        onSuccess: (ctx) => {
+        onRequest: () => {},
+        onSuccess: () => {
           window.alert("Success");
         },
-        onError: (ctx) => {
+        onError: () => {
           window.alert("Error");
         },
       }
@@ -35,11 +35,11 @@ export default function Home() {
         password,
       },
       {
-        onRequest: (ctx) => {},
-        onSuccess: (ctx) => {
+        onRequest: () => {},
+        onSuccess: () => {
           window.alert("Login Success");
         },
-        onError: (ctx) => {
+        onError: () => {
           window.alert("Something went wrong");
         },
       }
