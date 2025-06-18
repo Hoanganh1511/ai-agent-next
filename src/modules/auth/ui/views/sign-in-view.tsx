@@ -134,6 +134,11 @@ const SignInView = () => {
                     variant="outline"
                     disabled={pending}
                     type="button"
+                    onClick={() =>
+                      authClient.signIn.social({
+                        provider: "github",
+                      })
+                    }
                     className="w-full"
                   >
                     Github
