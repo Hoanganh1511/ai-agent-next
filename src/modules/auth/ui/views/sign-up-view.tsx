@@ -18,7 +18,6 @@ import {
 import { useForm } from "react-hook-form";
 import { OctagonAlertIcon } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 const formSchema = z
   .object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -38,7 +37,6 @@ const formSchema = z
     }
   );
 const SignUpView = () => {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,11 +56,30 @@ const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/");
+        },
+        onError: ({ error }) => {
+          setPending(false);
+          setError(error.message);
+        },
+      }
+    );
+  };
+  const onSocial = (provider: "github" | "google") => {
+    setError(null);
+    setPending(true);
+    authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
+          setPending(false);
         },
         onError: ({ error }) => {
           setPending(false);
@@ -181,6 +198,7 @@ const SignUpView = () => {
                     variant="outline"
                     disabled={pending}
                     type="button"
+                    onClick={() => onSocial("google")}
                     className="w-full"
                   >
                     Google
@@ -189,6 +207,7 @@ const SignUpView = () => {
                     variant="outline"
                     disabled={pending}
                     type="button"
+                    onClick={() => onSocial("github")}
                     className="w-full"
                   >
                     Github
