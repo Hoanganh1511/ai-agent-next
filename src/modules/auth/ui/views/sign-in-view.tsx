@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth-client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -148,6 +149,7 @@ const SignInView = () => {
                     onClick={() => onSocial("google")}
                     className="w-full"
                   >
+                    <FaGoogle />
                     Google
                   </Button>
                   <Button
@@ -157,6 +159,7 @@ const SignInView = () => {
                     onClick={() => onSocial("github")}
                     className="w-full"
                   >
+                    <FaGithub />
                     Github
                   </Button>
                 </div>

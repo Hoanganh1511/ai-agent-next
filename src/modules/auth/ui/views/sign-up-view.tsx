@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth-client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,6 +19,7 @@ import {
 import { useForm } from "react-hook-form";
 import { OctagonAlertIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 const formSchema = z
   .object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -37,6 +39,7 @@ const formSchema = z
     }
   );
 const SignUpView = () => {
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,6 +64,7 @@ const SignUpView = () => {
       {
         onSuccess: () => {
           setPending(false);
+          router.push("/");
         },
         onError: ({ error }) => {
           setPending(false);
@@ -201,6 +205,7 @@ const SignUpView = () => {
                     onClick={() => onSocial("google")}
                     className="w-full"
                   >
+                    <FaGoogle />
                     Google
                   </Button>
                   <Button
@@ -210,6 +215,7 @@ const SignUpView = () => {
                     onClick={() => onSocial("github")}
                     className="w-full"
                   >
+                    <FaGithub />
                     Github
                   </Button>
                 </div>
