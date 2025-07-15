@@ -6,7 +6,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupAction,
+  // SidebarGroupAction,
   SidebarGroupContent,
   SidebarHeader,
   SidebarMenu,
@@ -16,6 +16,9 @@ import {
 import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import DashboardUserButton from "./dashboard-user-button";
 const firstSection = [
   {
     icon: VideoIcon,
@@ -36,6 +39,8 @@ const secondSection = [
   },
 ];
 const DashboardSidebar = () => {
+  const pathname = usePathname();
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -52,8 +57,15 @@ const DashboardSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {firstSection.map((item) => (
-                <SidebarMenuItem key={item.label}>
-                  <SidebarMenuButton>
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton
+                    asChild
+                    className={cn(
+                      "h-10 hover:bg-linear-to-r/oklch border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
+                      pathname === item.href &&
+                        "bg-linear-to-r/oklch border-[#5D6B68]/10"
+                    )}
+                  >
                     <Link href={item.href}>
                       <span className="text-sm font-medium tracking-tight">
                         {item.label}
@@ -66,6 +78,9 @@ const DashboardSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className=" ">
+        <DashboardUserButton />
+      </SidebarFooter>
     </Sidebar>
   );
 };
