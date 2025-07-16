@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
+import { BotIcon, VideoIcon } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { usePathname } from "next/navigation";
@@ -31,13 +31,13 @@ const firstSection = [
     href: "/agents",
   },
 ];
-const secondSection = [
-  {
-    icon: StarIcon,
-    label: "Upgrade",
-    href: "/upgrade",
-  },
-];
+// const secondSection = [
+//   {
+//     icon: StarIcon,
+//     label: "Upgrade",
+//     href: "/upgrade",
+//   },
+// ];
 const DashboardSidebar = () => {
   const pathname = usePathname();
 
